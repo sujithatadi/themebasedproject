@@ -1,0 +1,103 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+<style>
+    
+    .container{
+        background-color: rgb(223, 211, 211);
+    }
+    .header{
+        height:270px;
+    }
+    .header_propic{
+        padding: 30px;
+        float:left;
+        width:fit-content;
+    }
+    .header_title{
+        float:left;
+        padding: 30px;
+        font-size: 30px;
+    }
+    
+    
+    .cmnt-b{
+        background-color: beige;
+       width:60%;
+        padding: 3px;
+        font-size: 15px;
+    }
+    .cmnt-b h4{
+        color:darkgreen;
+    }
+    .cmnt-b h6{
+        color:darkgreen;
+        padding-left: 30px;
+    }
+    .cmnt-b p{
+        color:darkgreen;
+        
+    }
+    
+</style>
+<div class="container">
+    <div class=header>
+<h1>
+    <div class="header_propic">
+    <img src="{{ s.pro_pic.url }}" height=200px;>
+</div>
+    <div class="header_title">
+    {{  post.title  }}<br>
+    <small>By: {{ post.name }}<br>{{ s.branch }}</small>
+
+</div>
+</h1>
+</div>
+    <div class="container">
+       
+    {{ post.desc | linebreaks }}
+   
+</div>
+<form action="{% url 'like_post' post.pk %}" method="POST">
+    {% csrf_token %}
+    {% if liked %}
+    <button type="submit",name="post_id", value="{{ post.id }}",  class="btn btn-danger btn-sm">UnLike</button>
+    {% else %}
+    <button type="submit",name="post_id", value="{{ post.id }}",  class="btn btn-primary btn-sm">Like</button>
+    {% endif %}
+    {{ t }} likes
+ </form> 
+ <h2>Comments</h2>
+ <div class="container">
+    <div class="post_form">
+    <form action="{% url 'addComment' post.pk %} " method="POST" role="form">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-primary" name="submit">Comment</button>
+    
+    </form>
+    </div>
+    </div>
+ {% if not post.comments.all %}
+    <h6>No comments yet</h6>
+{% else %}
+    
+   <div class="container">
+    {% for comment in post.comments.all %}
+    
+    <div class="cmnt-b">
+        <h4>{{comment.name}}-</h4>
+    
+           <p> {{comment.date_added}}</p>
+        
+       <h6>{{comment.body}}</h6> 
+    </div>   
+    
+    <br>
+    {% endfor %}
+</div> 
+    
+{% endif%}
+</div>
+
+        {% endblock %}

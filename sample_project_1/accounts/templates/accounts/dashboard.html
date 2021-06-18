@@ -1,0 +1,70 @@
+{% extends 'accounts/main.html'  %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+<style>
+    #jobs{
+    background:#f8f8fa;
+    padding:50px 0;
+}
+.company-details{
+    box-shadow:0 2px 70px 0 rgba(110,130,208,.18);
+    border-radius:5px;
+    margin-bottom:20px
+}
+.job-update{
+     background:#fff;
+    padding:10px 20px;
+    border-radius: 5px;
+}
+.job-update .fa{
+    margin-top: 5px;
+    margin-right: 10px;
+    color: #77d1b1;
+}
+.job-update small{
+    background: #efefef;
+    padding:1px 5px;
+    margin:0 5px;
+}
+.job-update p{
+    margin-bottom: 0 !important;
+}
+
+
+</style>
+
+
+{% block content %}
+
+<section id="jobs">
+    <div class="container">
+        <h5>RECENT UPDATES</h5>
+        {% if posts %}
+        {% for i in posts %}
+<div class="company-details">
+   
+    <div class="card" style="width: 50rem;">
+        <div class="card-body">
+            <h4  ><b>{{i.name}}</b></h4>
+          <h5 class="card-title"><b>{{i.title}}</b></h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{i.pub_date}}</h6>
+          <p class="card-text">{{ i.desc | truncatewords:"100"  }}</p>
+          <a href="{% url 'post-detail' i.pk %}"><h4><b>Read more</b></h4></a>
+          <form action="{% url 'like_post' i.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit",name="post_id", value="{{ i.id }}",  class="btn btn-secondary btn-sm">Like</button>
+         </form> 
+        </div>
+      </div>   
+      <br>
+      <br>
+      
+</div>
+{% endfor %}
+{% else %}
+    <h5>NO Posts</h5>
+{% endif %}
+
+{% endblock %}
+</div>
+</section>

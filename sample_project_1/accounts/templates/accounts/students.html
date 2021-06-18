@@ -1,0 +1,48 @@
+{% extends 'accounts/main.html'  %}
+{% load static%}
+{% block content %}
+<style>
+    .image{
+        
+        width:300px;
+        
+        height:300px;
+         
+         
+        padding-top:45px;
+        
+    }
+    img{
+        
+        border-radius:50%;
+        object-fit:"cover";
+    }
+    .c-box{
+        
+        height:450px;
+        padding-left:25px;
+    }
+</style>
+<div class="container">
+    <div class="c-box">
+    <div class="image">
+<img src="{{ s.pro_pic.url }}" height=200px;>
+</div>
+
+<a href="{% url 'createPost'  %}">create new post!</a>
+
+<h2>{{s.phone}}</h2>
+<p>{{s.email}}</p>
+<p>{{s.branch}}</p>
+<p>{{s.section}}</p>
+</div>
+<!--{%for i in sp%}
+<h1>{{i.title}}</h1>
+<h2>{{i.desc}}</h2>
+<p>{{i.pub_date}}</p>
+
+</div>
+<hr>
+{% endfor %}-->
+
+{% endblock %}

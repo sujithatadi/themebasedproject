@@ -1,0 +1,10 @@
+.post_content{
+    background-color: pink;
+    
+
+}
+.post_content_block{
+    background-color:coral;
+    align-self: center;
+    border-style: solid;
+}

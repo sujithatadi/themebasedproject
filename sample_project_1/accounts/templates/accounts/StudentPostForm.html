@@ -1,0 +1,60 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial;
+      font-size: 17px;
+    }
+    
+    .container {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .container img {vertical-align: middle;}
+    
+    .container .content {
+      position: absolute;
+      bottom: 0;
+      background: rgb(53, 2, 40); /* Fallback color */
+      background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+      color: #f1f1f1;
+      left:10%  ;
+      width: 80%;
+       top:10%;
+      padding: 100px;
+        bottom:10%;
+    }
+    </style>
+
+<!--<div class="container">
+    <br><br>
+<div class="post_form">
+    
+<form action=" " method="POST" role="form">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-secondary" name="submit">Post</button>
+
+</form>
+</div>
+</div>-->
+<div class="container">
+    <h1>Share your Experiences here...</h1>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsN_UwLp-U3NEW4rqYvw9jKTfI8ANXwWeZJQ&usqp=CAU" alt="Notebook" style="width:100%; height:150%;">
+    <div class="content">
+        <form action=" " method="POST" role="form">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-info" name="submit">Post</button>
+  
+    </div>
+  </div>
+{% endblock %}
